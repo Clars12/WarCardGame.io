@@ -30,10 +30,10 @@ let p2shuffcard = player2[0];
 
 
 do { 
-let counter = 10000;
+let counter = 1;
     do {
-      
         ck_winners();
+        console.log('     NEW HAND!');
         if (gametime === false) {
           return false;
         }
@@ -51,7 +51,7 @@ let counter = 10000;
            
                      // add to the pot for war 
                       pot.unshift(p1card, p2card,p1_pop(),p1_pop(),p2_pop(),p2_pop());
-                      console.log(pot);
+                      // console.log(pot);
                       p1card = p1_pop();
                       p2card = p2_pop();
 
@@ -82,11 +82,14 @@ let counter = 10000;
                                   [].unshift.apply(player1,pot);
                                   pot.length = 0;
                                   innerloop = false;
+                                  console.log('Hand'+' '+counter+ ' won by player 1');
+
                               } else if (p2card.value > p1card.value) {
                                   pot.unshift(p1card, p2card);
                                   [].unshift.apply(player2,pot);
                                   pot.length=0;
                                   innerloop = false;
+                                  console.log('Hand'+ ' '+counter+' won by player 2');
                               } else {
                                   console.log('innerloop error')
                                   innerloop = false;
@@ -100,12 +103,15 @@ let counter = 10000;
                         pot.unshift(p1card, p2card);
                         [].unshift.apply(player1,pot);
                         pot.length=0;
+                        console.log('Hand'+' '+counter+ ' won by player 1');
+
                     
 
                     } else if (p2card.value > p1card.value) {
                       pot.unshift(p1card, p2card);
                       [].unshift.apply(player2,pot);
                       pot.length=0;
+                      console.log('Hand'+ ' '+counter+' won by player 2');
 
                     } else { 
                         console.log('innerloop error')
@@ -115,12 +121,15 @@ let counter = 10000;
                     }                                                                    
           } else if (p1card.value > p2card.value) {
               player1.unshift(p1card,p2card);
+              console.log('Hand'+' '+counter+ ' won by player 1');
+
               ck_winners();
                 if (gametime === false) {
                 return false;
             }
           } else if (p2card.value > p1card.value) { 
               player2.unshift(p1card,p2card);
+              console.log('Hand'+ ' '+counter+' won by player 2');
               ck_winners();
                 if (gametime === false) {
                 return false;
@@ -131,13 +140,13 @@ let counter = 10000;
             console.log(p2card);
             }
                  
-        console.log(player1.length);
-        console.log(player2.length);
+        console.log('Player 1 card count: ' + player1.length);
+        console.log('Player 2 card count: ' + player2.length);
 
-        counter--;
-        console.log(counter);
+        counter++;
+        // console.log(counter);
 
-     } while (counter > 1 && gametime === true);
+     } while (counter < 10000 && gametime === true);
      gametime = false;
     } while (gametime === true);
 
@@ -160,10 +169,10 @@ function shuffle(arr) {
 
  function ck_winners() {
       if (player1.length < 1 && player2.length >1) {
-        console.log ('Winner: Player 2');
+        console.log ('Game Over: Winner Player 2');
         gametime = false;
     } else if (player1.length > 1 && player2.length < 1) {
-        console.log ('Winner: Player 1');
+        console.log ('Game Over: Winner Player 1');
         gametime = false;
     } 
 }
@@ -178,8 +187,10 @@ function p1_pop() {
           } else {
             p1shuffcard = f1;
           }
-        console.log('shuffle1');   
+        // console.log('shuffle1');   
     }
+    console.log('Player 1 card')
+    console.log(f1);
     return f1;
   }
 }
@@ -193,8 +204,10 @@ function p2_pop() {
           } else {
             p2shuffcard = f2;
           }
-        console.log('shuffle2');    
+        // console.log('shuffle2');    
     }
+    console.log('Player 2 card:');
+    console.log(f2);
     return f2;
   }
 }
