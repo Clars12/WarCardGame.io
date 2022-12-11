@@ -1,3 +1,4 @@
+//FINAL 20221211
 // create the deck
 class card {
     constructor(suit, value){
