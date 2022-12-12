@@ -1,5 +1,5 @@
 //FINAL 20221211
-// create the deck
+// Create the deck
 class card {
     constructor(suit, value){
         this.suit=suit;
@@ -37,10 +37,11 @@ let counter = 1;
         if (gametime === false) {
           return false;
         }
-         
-        let p1card = p1_pop();
-        let p2card = p2_pop();
+        // Play a hand
+        let p1card = p1_playcard();
+        let p2card = p2_playcard();
         
+        // compare the hand 
         if (p1card.value === p2card.value) {
           console.log("WARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
         
@@ -49,17 +50,17 @@ let counter = 1;
                   return false;
                 }
            
-                     // add to the pot for war 
-                      pot.unshift(p1card, p2card,p1_pop(),p1_pop(),p2_pop(),p2_pop());
+                     // add cards to the pot for war 
+                      pot.unshift(p1card, p2card,p1_playcard(),p1_playcard(),p2_playcard(),p2_playcard());
                       // console.log(pot);
-                      p1card = p1_pop();
-                      p2card = p2_pop();
+                      p1card = p1_playcard();
+                      p2card = p2_playcard();
 
                 ck_winners();
                 if (gametime === false) {
                   return false;
                 }
-                    
+                    // if no winner on the first round of war, go to the second round and loop until winner
                     if (p1card.value === p2card.value) {
                           console.log('war inner loop');
                           do {
@@ -72,8 +73,8 @@ let counter = 1;
                               return false;
                              }
 
-                              p1card = p1_pop();
-                              p2card = p2_pop();
+                              p1card = p1_playcard();
+                              p2card = p2_playcard();
                               
                               if (p1card.value === p2card.value) {
                                  innerloop = true;
@@ -177,7 +178,7 @@ function shuffle(arr) {
     } 
 }
 
-function p1_pop() {
+function p1_playcard() {
   if (player1.length >0) {
     let f1 = player1.pop() 
       if (f1.value === p1shuffcard.value && f1.suit === p1shuffcard.suit) {
@@ -189,12 +190,12 @@ function p1_pop() {
           }
         // console.log('shuffle1');   
     }
-    console.log('Player 1 card')
+    console.log('Player 1 card');
     console.log(f1);
     return f1;
   }
 }
-function p2_pop() {
+function p2_playcard() {
   if (player2.length >0){
     let f2 = player2.pop()
     if (f2.value === p2shuffcard.value && f2.suit === p2shuffcard.suit) {
